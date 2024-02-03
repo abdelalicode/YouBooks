@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,15 @@ use App\Http\Controllers\BookController;
 */
 
 
-Route::get('/', [BookController::class , 'index'])->name('homepage');
-Route::get('/books/{id}', [BookController::class , 'show'])->name('show');
-Route::get('/reserved', [BookController::class , 'reserved'])->name('reserved');
+// Route::get('/', [BookController::class , 'index'])->name('homepage');
+// Route::get('/books/{id}', [BookController::class , 'show'])->name('show');
+// Route::get('/reserved', [BookController::class , 'reserved'])->name('reserved');
+
+// Route::post('/addbook' , [BookController::class, 'store'])->name('book.store');
+
+Route::resource('book', BookController::class);
+
+
+Route::get('/', [ReservationController::class , 'index'])->name('reservation.index');
+Route::post('reservation/{book}', [ReservationController::class,'store'])->name('reservation.store');
+

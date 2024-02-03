@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand mx-5" href="/"><span class="material-symbols-outlined" style="color: orange;">
+    <a class="navbar-brand mx-5" href="{{ route('book.index') }}"><span class="material-symbols-outlined" style="color: orange;">
   YOUbook
 </span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
         <li class="nav-item px-3">
-          <a class="nav-link" href="{{ route('homepage') }}">BOOKS</a>
+          <a class="nav-link" href="{{ route('book.create') }}">BOOKS</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="/">CATEGORIES</a>
+          <a class="nav-link" href="{{ route('book.index') }}">CATEGORIES</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -38,13 +38,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="{{ route('book.index') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             USER
           </a>
           <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" href="/">PROFILE</a></li>
-            <li><a class="dropdown-item" href="{{ route('reserved')}}">MY BOOKS</a></li>
-            <li><a class="dropdown-item" href="/">LOGOUT</a></li>
+            <li><a class="dropdown-item" href="{{ route('book.index') }}">PROFILE</a></li>
+            <li><a class="dropdown-item" href="{{ route('reservation.index') }}">MY BOOKS</a></li>
+            <li><a class="dropdown-item" href="{{ route('book.index') }}">LOGOUT</a></li>
           </ul>
         </li>
       </ul>
