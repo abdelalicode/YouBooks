@@ -15,22 +15,25 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::where('returned', 0)->get();
 
         $resbooks = [];
 
-        foreach ($reservations as $reservation) {
+        foreach ($reservations as $reservation)
+        {
             $bookId = $reservation->book_id;
 
-            $book = Book::where('id', '=', $bookId)->first();
+            $book = Book::find($bookId);
 
-            $resbooks[$reservation->id] = $book;
+            $resbooks[] = [
+                'reservation' => $reservation,
+                'book' => $book,
+            ];
         }
-
-
 
         return view('books.reserved', compact('resbooks'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,11 +55,11 @@ class ReservationController extends Controller
         ]);
 
         //     Reservation::create($request->validated());
-        return redirect()->route('book.index');
+        return redirect()->route('reservation.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource
      */
     public function show(Reservation $reservation)
     {
@@ -76,7 +79,8 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        //
+        $reservation->update(['returned' => 1]);   
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -84,6 +88,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->route('reservation.index');
     }
 }

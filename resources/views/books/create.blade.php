@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h2 class="mt-5">ADD A BOOK</h2>
+<h2 class="mt-5 p-5">ADD A BOOK</h2>
 
-<div class="container m-5">
+<div class="container mx-5 px-5">
 
    
                     <form method="post" action="{{ route('book.store')}}">

@@ -2,6 +2,7 @@
 
 @section('content')
 
+<div class="container">
 <h2 class="m-5">BOOK DETAILS</h2>
                     <h3 class="card-title mb-4">{{ $book->title }}</h3>
                     <p class="card-text mt-3">Author: <b> {{ $book->author }} </b></p>
@@ -17,5 +18,5 @@
                             <button type="submit" class="btn btn-outline-danger">DELETE</button>
                         </form>
                     </div>
-
+                </div>
 @endsection

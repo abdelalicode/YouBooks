@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('layouts.middle')
 <div class="container mt-5">
     <h2 class="mt-5">BOOKS AVAILABLE</h2>
     <div class="row">
