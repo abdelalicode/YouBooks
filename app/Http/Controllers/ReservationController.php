@@ -6,7 +6,7 @@ use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Book;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -15,7 +15,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::where('returned', 0)->get();
+        $reservations = Reservation::where('user_id', Auth::user()->id)->where('returned', 0)->get();
 
         $resbooks = [];
 
@@ -49,9 +49,19 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request, Book $book)
     {
 
+        $reservation = Reservation::where('user_id', Auth::user()->id)
+                                      ->where('book_id', $book->id)
+                                      ->where('returned', 0)
+                                      ->first();
+        
+        if($reservation) {
+            return back()->withErrors(['error_reservation' => 'You already have a reservation for this book']);
+        }
+        
         Reservation::create([
-            'user_id' => 1,
-            'book_id' => $book->id
+            'user_id' => Auth::user()->id,
+            'book_id' => $book->id,
+             'reservation_date' => $request->input('reservation_date')
         ]);
 
         //     Reservation::create($request->validated());

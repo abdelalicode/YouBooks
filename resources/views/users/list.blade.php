@@ -24,18 +24,18 @@
                 <td>{{$user->lastname}}</td>
                 <td>{{ strtoupper($user->role->name) }}</td>
                 <td>
-                    <form class="d-flex gap-2" action="" method="post">
+                    <form class="d-flex gap-2" action="{{ route('users.update') }}" method="post">
                         @csrf
-                        <input type="hidden" name="user_id">
-                        <select class="form-select w-50" aria-label="Default select example">
+                        @method('PUT')
+                        <input type="hidden" name="user_id" value="{{$user->id}}">
+                        <select class="form-select w-50" aria-label="Default select example" name="role_id">
                             <option selected>Select a Role</option>
                             @foreach ($roles as $role)
-                            <option name="" value="{{ $role->id }}">{{ $role->name }}</option>
+                            <option  value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-
-                        <button type="submit" class="btn btn-warning text-white">></button>
-                    </form>
+                          <button type="submit" class="btn btn-warning text-white">></button>
+                      </form>
                 </td>
               </tr>
               @endforeach

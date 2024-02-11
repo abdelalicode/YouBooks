@@ -20,9 +20,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       @auth
       <ul class="navbar-nav me-auto  mb-2 mb-lg-0">  
+        @if (Auth::user()->role->name == 'bibliothecaire')
         <li class="nav-item px-3">
-          <a class="nav-link" href="{{ route('book.create') }}">ADD BOOKS</a>
+            <a class="nav-link" href="{{ route('book.create') }}">ADD BOOKS</a>
         </li>
+        @endif
+
+      
+        
         <li class="nav-item px-3">
           <a class="nav-link" href="{{ route('book.index') }}">CATEGORIES</a>
         </li>
@@ -42,12 +47,16 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{{ route('book.index') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{session('user_name')}}  {{session('user_lname')}}
+                {{Auth::user()->lastname}}  {{Auth::user()->firstname}}
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item" href="{{ route('book.index') }}">PROFILE</a></li>
+                @if (Auth::user()->role->name == 'etudiant')
                 <li><a class="dropdown-item" href="{{ route('reservation.index') }}">MY BOOKS</a></li>
-                <li><a class="dropdown-item" href="{{ route('users') }}">ASSIGN ROLES</a></li>
+                @endif
+                @if (Auth::user()->role->name == 'bibliothecaire')
+                  <li><a class="dropdown-item" href="{{ route('users') }}">ASSIGN ROLES</a></li>
+                @endif
                 <li><a class="dropdown-item" href="{{ route('logout') }}">LOGOUT</a></li>
               </ul>
             </li>

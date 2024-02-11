@@ -63,10 +63,11 @@ class AuthController extends Controller
     if ($user) {
         if (Hash::check($credentials['password'], $user->password)) {
            Auth::login($user);
-           $request->session()->put('user_id', $user->id);
-        $request->session()->put('user_email', $user->email);
-        $request->session()->put('user_name', $user->firstname);
-        $request->session()->put('user_lname', $user->lastname);
+        //    $request->session()->put('user_id', $user->id);
+        // $request->session()->put('user_email', $user->email);
+        // $request->session()->put('user_name', $user->firstname);
+        // $request->session()->put('user_lname', $user->lastname);
+        // $request->session()->put('role_id', $user->role_id);
 
         $request->session()->regenerate();
            return redirect()->route('book.index');
@@ -76,7 +77,7 @@ class AuthController extends Controller
             return back()->withErrors(['password' => 'Wrong Password'])->onlyInput('email');
         }
     } else {
-        echo "Nothing";
+        return back()->withErrors(['email' => 'No user found!']);
     }
 
     }
@@ -84,10 +85,9 @@ class AuthController extends Controller
     public function logout()
     {
         session()->flush();;
-
         Auth::logout();
 
-        return redirect()->route('book.index');
+        return redirect()->route('homepage');
 
     }
 

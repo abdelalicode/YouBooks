@@ -43,10 +43,20 @@
                 <div class="col-12">
                   <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                   <input type="email" class="form-control" name="email" placeholder="name@example.com" id="email-field">
+                  @error('email')
+                  <div class="text-danger">
+                    {{ $message }}
+                  </div> 
+                  @enderror
                 </div>
                 <div class="col-12">
                   <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                   <input type="password" class="form-control" name="password" id="password-field" required>
+                  @error('password')
+                  <div class="text-danger">
+                    {{ $message }}
+                  </div> 
+                  @enderror
                 </div>
                 <div class="col-12">
                   <div class="form-check">

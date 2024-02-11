@@ -26,7 +26,16 @@ send_and_archive
                     </div>
 
                 </div>
+                @php
+                $remaining = now()->diffInDays($bookres['reservation']->reservation_date);
+            @endphp
+
+<button type="button" class="btn btn-warning mr-5">
+You still have <span class="badge text-bg-danger">{{ $remaining }}</span> Days
+</button>
             </div>
+               
+            
         </div>
         @endforeach
     </div>

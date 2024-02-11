@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->date('reservation_date')->default(now());
+        });        
     }
 
     /**
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('reservations', function (Blueprint $table) {
+            //
+        });
     }
 };
